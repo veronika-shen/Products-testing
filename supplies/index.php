@@ -1,7 +1,9 @@
 <?php
 /** @var PDO $pdo */
 $pdo = require $_SERVER['DOCUMENT_ROOT'].'/Products-testing/db.php';
-$supplies = $pdo->query("SELECT * FROM supplies");
+$supplies = $pdo->query("SELECT supplies.*, products.name AS name 
+                                FROM supplies
+                                LEFT JOIN products ON supplies.product_id = products.id")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -15,7 +17,7 @@ $supplies = $pdo->query("SELECT * FROM supplies");
 <body>
 <h1>Список продукции</h1>
 <a href="/Products-testing/"><button>Все товары</button></a>
-<a href="create.php"><button>Добавить поставку</button></a>
+<a href="create.php" id="createSup"><button>Добавить поставку</button></a>
 <table>
     <thead>
     <tr>
@@ -32,8 +34,8 @@ $supplies = $pdo->query("SELECT * FROM supplies");
         <td><?= $supplie['name']?></td>
         <td><?= $supplie['count']?></td>
         <td><?= $supplie['date']?></td>
-        <td><a href="edit.php?id=<?= $supplie['id']?>">Изменить</a></td>
-        <td><a href="actions/delete.php?id=<?= $supplie['id']?>">Удалить</a></td>
+        <td><a href="edit.php?id=<?= $supplie['id']?>" id="edit<?= $supplie['id']?>">Изменить</a></td>
+        <td><a href="actions/delete.php?id=<?= $supplie['id']?>" id="delete<?= $supplie['id']?>">Удалить</a></td>
     </tr>
     <?php endforeach; ?>
     </tbody>

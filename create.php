@@ -13,11 +13,11 @@
 <body>
 <h1>Создание новой записи с товаром</h1>
 <form action="actions/store.php" method="post">
-    <input type="text" name="name" placeholder="Наименование товара" required>
+    <input type="text" name="name" id="name" placeholder="Наименование товара" required>
     <label for="price">Цена товара</label>
     <input type="number" name="price" id="price" required>
-    <input type="text" name="article" placeholder="Артикул" required>
-    <input type="submit">
+    <input type="text" name="article" id="article" placeholder="Артикул" required>
+    <input type="submit" id="submit">
 </form>
 </body>
 </html>

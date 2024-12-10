@@ -14,8 +14,8 @@ $products = $pdo->query("SELECT * FROM products");
 </head>
 <body>
 <h1>Список продукции</h1>
-<a href="supplies/"><button>Поставки товара</button></a>
-<a href="create.php"><button>Добавить новый товар</button></a>
+<a href="supplies/" id="supplies"><button>Поставки товара</button></a>
+<a href="create.php" id="create"><button>Добавить новый товар</button></a>
 <table>
     <thead>
     <tr>
@@ -32,8 +32,8 @@ $products = $pdo->query("SELECT * FROM products");
         <td><?= $product['name']?></td>
         <td><?= $product['price']?></td>
         <td><?= $product['article']?></td>
-        <td><a href="edit.php?id=<?= $product['id']?>">Изменить</a></td>
-        <td><a href="actions/delete.php?id=<?= $product['id']?>">Удалить</a></td>
+        <td><a href="edit.php?id=<?= $product['id']?>" id="edit<?= $product['id']?>">Изменить</a></td>
+        <td><a href="actions/delete.php?id=<?= $product['id']?>" id="delete<?= $product['id']?>">Удалить</a></td>
     </tr>
     <?php endforeach; ?>
     </tbody>

@@ -22,7 +22,7 @@ $product = $pdo->query("SELECT * FROM products WHERE id = '$id'")->fetch(PDO::FE
     <input type="number" name="price" id="price" value="<?=  $product['price']?>">
     <input type="text" name="article" value="<?= $product['article'] ?>">
     <input type="hidden" value="<?= $product['id'] ?>" name="id">
-    <input type="submit">
+    <input type="submit" name="submit">
 </form>
 <a href="index.php"><button>Отмена</button></a>
 

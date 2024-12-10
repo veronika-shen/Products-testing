@@ -6,4 +6,4 @@ $id = $_GET['id'];
 $pdo = require $_SERVER['DOCUMENT_ROOT'].'/Products-testing/db.php';
 $pdo->query("DELETE FROM supplies WHERE id=$id");
 
-header('Location: /supplies/index.php');
+header('Location: /Products-testing/supplies/index.php');

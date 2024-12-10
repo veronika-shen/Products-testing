@@ -1,12 +1,13 @@
 <?php
 
 $id = $_POST['id'];
-$name = $_POST['name'];
-$price = $_POST['price'];
-$article = $_POST['article'];
+$product_id = $_POST['product'];
+$date = $_POST['date'];
+$count = $_POST['count'];
+
 
 /** @var PDO $pdo */
 $pdo = require $_SERVER['DOCUMENT_ROOT'].'/Products-testing/db.php';
 
-$pdo->query("UPDATE supplies SET product_id='$name', price='$price', article='$article' WHERE id=$id");
-header('Location: /supplies/index.php');
+$pdo->query("UPDATE supplies SET product_id='$product_id', date='$date', count='$count'  WHERE id=$id");
+header('Location: /Products-testing/supplies/index.php');

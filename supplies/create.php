@@ -2,7 +2,7 @@
 
 /** @var PDO $pdo */
 $pdo = require $_SERVER['DOCUMENT_ROOT'].'/Products-testing/db.php';
-$supplies = $pdo->query("SELECT * FROM supplies")->fetchAll(PDO::FETCH_ASSOC);
+$products = $pdo->query("SELECT * FROM products")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -16,16 +16,16 @@ $supplies = $pdo->query("SELECT * FROM supplies")->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <h1>Добавить новую запись о поставки</h1>
 <form action="actions/store.php" method="post">
-    <select name="supplie" id="supplie" required>
-        <?php foreach ($supplies as $supplie): ?>
-        <option value="<?= $supplie['id']?>"><?= $supplie['name']?></option>
+    <select name="product" id="product" required>
+        <?php foreach ($products as $product): ?>
+        <option value="<?= $product['id']?>"><?= $product['name']?></option>
         <?php endforeach; ?>
     </select>
     <label for="date">Дата</label>
     <input type="date" name="date" id="date" required>
     <label for="count">Количество</label>
     <input type="number" name="count" id="count" required>
-    <input type="submit">
+    <input type="submit" name="submit" id="#submit">
 </form>
 </body>
 </html>
