@@ -2,6 +2,8 @@
 /** @var PDO $pdo */
 $pdo = require $_SERVER['DOCUMENT_ROOT'].'/Products-testing/db.php';
 $products = $pdo->query("SELECT * FROM products");
+$count = $pdo->prepare("SELECT SUM(count) AS sum FROM supplies WHERE product_id = :id");
+
 ?>
 <!doctype html>
 <html lang="ru">
@@ -23,6 +25,7 @@ $products = $pdo->query("SELECT * FROM products");
         <td>Наименование</td>
         <td>Цена</td>
         <td>Артикул</td>
+        <td>В наличии</td>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +35,9 @@ $products = $pdo->query("SELECT * FROM products");
         <td><?= $product['name']?></td>
         <td><?= $product['price']?></td>
         <td><?= $product['article']?></td>
+        <td><?php $count->execute(['id'=>$product['id']]);
+                $resSum = $count->fetch(PDO::FETCH_ASSOC);
+                echo $resSum['sum'];?></td>
         <td><a href="edit.php?id=<?= $product['id']?>" id="edit<?= $product['id']?>">Изменить</a></td>
         <td><a href="actions/delete.php?id=<?= $product['id']?>" id="delete<?= $product['id']?>">Удалить</a></td>
     </tr>
