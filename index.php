@@ -37,6 +37,9 @@ $count = $pdo->prepare("SELECT SUM(count) AS sum FROM supplies WHERE product_id 
         <td><?= $product['article']?></td>
         <td><?php $count->execute(['id'=>$product['id']]);
                 $resSum = $count->fetch(PDO::FETCH_ASSOC);
+                if($resSum['sum'] == 0){
+                    echo 'Нет в наличии';
+                }else
                 echo $resSum['sum'];?></td>
         <td><a href="edit.php?id=<?= $product['id']?>" id="edit<?= $product['id']?>">Изменить</a></td>
         <td><a href="actions/delete.php?id=<?= $product['id']?>" id="delete<?= $product['id']?>">Удалить</a></td>
