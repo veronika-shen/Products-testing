@@ -10,23 +10,28 @@ class FirstCest
     public function _before(AcceptanceTester $I)
     {
     }
+}
 
-    public function CRUD1(AcceptanceTester $I){
+class CRUD_products
+{
+
+    public function CRUD1(AcceptanceTester $I)
+    {
 //        read
         $I->amOnPage('http://localhost/Products-testing/index.php');
 //        create
         $I->click('#create');
-        $I->fillField('#name','TestName10');
-        $I->fillField('#price','580');
-        $I->fillField('#article','000009');
+        $I->fillField('#name', 'TestName10');
+        $I->fillField('#price', '580');
+        $I->fillField('#article', '000009');
         $I->click('#submit');
         $I->amOnPage('http://localhost/Products-testing/index.php');
         $I->canSee('TestName9');
 ////        edit
         $I->click('#edit22');
-        $I->fillField('name','EditTestName9');
-        $I->fillField('price','9380');
-        $I->fillField('article','000019');
+        $I->fillField('name', 'EditTestName9');
+        $I->fillField('price', '9380');
+        $I->fillField('article', '000019');
         $I->click('submit');
         $I->amOnPage('http://localhost/Products-testing/index.php');
         $I->canSee('EditTestName9');
@@ -36,6 +41,10 @@ class FirstCest
         $I->click('#delete22');
         $I->cantSee('TestName9');
     }
+}
+
+class CRUD_supplies
+{
 
     public function CRUD2(AcceptanceTester $I){
 //        read
