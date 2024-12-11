@@ -1,9 +1,13 @@
 <?php
 /** @var PDO $pdo */
 $pdo = require $_SERVER['DOCUMENT_ROOT'].'/Products-testing/db.php';
-$products = $pdo->query("SELECT * FROM products");
-$count = $pdo->prepare("SELECT SUM(count) AS sum FROM supplies WHERE product_id = :id");
-
+$products = $pdo->query("
+    SELECT products.*, SUM(supplies.count) AS count
+    FROM products
+    LEFT JOIN supplies ON products.id = supplies.product_id
+    GROUP BY products.id
+")->fetchAll(PDO::FETCH_ASSOC);
+var_dump($products);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -35,12 +39,10 @@ $count = $pdo->prepare("SELECT SUM(count) AS sum FROM supplies WHERE product_id 
         <td><?= $product['name']?></td>
         <td><?= $product['price']?></td>
         <td><?= $product['article']?></td>
-        <td><?php $count->execute(['id'=>$product['id']]);
-                $resSum = $count->fetch(PDO::FETCH_ASSOC);
-                if($resSum['sum'] == 0){
+        <td><?php if($product['count'] == 0){
                     echo 'Нет в наличии';
                 }else
-                echo $resSum['sum'];?></td>
+                echo $product['count'];?></td>
         <td><a href="edit.php?id=<?= $product['id']?>" id="edit<?= $product['id']?>">Изменить</a></td>
         <td><a href="actions/delete.php?id=<?= $product['id']?>" id="delete<?= $product['id']?>">Удалить</a></td>
     </tr>
