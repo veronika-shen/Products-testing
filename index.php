@@ -7,7 +7,7 @@ $products = $pdo->query("
     LEFT JOIN supplies ON products.id = supplies.product_id
     GROUP BY products.id
 ")->fetchAll(PDO::FETCH_ASSOC);
-var_dump($products);
+
 ?>
 <!doctype html>
 <html lang="ru">
